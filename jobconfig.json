@@ -1,0 +1,38 @@
+{
+    "name": "DataPipeline1",
+    "new_cluster": {
+      "spark_version": "6.1.x-scala2.11",
+      "spark_conf": {
+        "spark.databricks.delta.preview.enabled": "true"
+      },
+      "node_type_id": "Standard_F4s",
+      "cluster_log_conf": {
+        "dbfs": {
+          "destination": "dbfs:/cluster-logs"
+        }
+      },
+      "num_workers": 1
+    },
+    "libraries": [
+      {
+        "egg": "dbfs:/Automation/qa/data_pipeline/__VERSION__/__LIBRARY__"
+      }
+    ],
+    "email_notifications": {
+      "on_start": [
+        "jason.robey@databricks.com"
+      ],
+      "on_success": [
+        "jason.robey@databricks.com"
+      ],
+      "on_failure": [
+        "jason.robey@databricks.com"
+      ]
+    },
+    "timeout_seconds": 0,
+    "notebook_task": {
+      "notebook_path": "/Automation/qa/data_pipeline/__VERSION__/__NOTEBOOK__",
+      "revision_timestamp": 0
+    },
+    "max_concurrent_runs": 1
+}
