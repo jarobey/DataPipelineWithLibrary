@@ -59,3 +59,7 @@ display(march_confirmed)
 # COMMAND ----------
 
 display(march_confirmed)
+
+# COMMAND ----------
+
+print("That looks like a good starting point")
