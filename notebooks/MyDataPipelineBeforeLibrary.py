@@ -37,5 +37,7 @@ stack_string += ') as (Day, Confirmed)'
 
 print(stack_string)
 
-unrolled_confirmed = usa_confirmed.select(col('County Name'),expr(stack_string))
-display(unrolled_confirmed)
+# unrolled_confirmed = usa_confirmed.select(col('County Name'),expr(stack_string))
+# display(unrolled_confirmed)
+
+print("I just want to see success")
