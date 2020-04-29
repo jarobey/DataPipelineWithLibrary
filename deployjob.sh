@@ -1,12 +1,5 @@
 set -x
 
-DATABRICKS_HOST=$1 # Take PAT in as second argument
-DATABRICKS_TOKEN=$2 # Take PAT in as second argument
-
-# For token auth there are two lines expected
-# URL, PAT
-echo -e "$DATABRICKS_HOST\n$DATABRICKS_TOKEN\n" | databricks --profile auto_deploy configure --token
-
 # Paths to place the new production libraries and notebooks
 VERSION="0.5"
 DEPLOY_STRING=$VERSION"__$(date +%Y%m%d_%H%M%S)"
@@ -24,7 +17,7 @@ PRODUCTION_WORKSPACE_PATH=$UNIFIED_PATH
 # cd ..
 
 # Recursively import the appropriate notebooks to the production folder.
-databricks --profile auto_deploy workspace import_dir notebooks $PRODUCTION_WORKSPACE_PATH
+databricks --profile auto_qa workspace import_dir notebooks $PRODUCTION_WORKSPACE_PATH
 
 # Deploy the job
 #sed "s/__LIBRARY__/$PRODUCTION_LIB_PATH/g; s/__NOTEBOOK__/$NOTEBOOK/g" jobconfig.json > tempconf.json
@@ -36,4 +29,4 @@ rm tempconf.json
 [[ $RESPONSE =~ .*job_id\"\:\ ([0-9]+) ]]
 JOB_ID=${BASH_REMATCH[1]}
 echo $JOB_ID
-databricks --profile auto_deploy jobs run-now --job-id $JOB_ID
+databricks --profile auto_qa jobs run-now --job-id $JOB_ID
